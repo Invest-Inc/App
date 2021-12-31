@@ -143,7 +143,7 @@ export default class BusinessProfileScreen extends React.Component {
                                     backgroundColor: 'white',
                                     marginVertical: 0.5
                                 }}
-                                onPress={() => { this.props.navigation.navigate("BusinessNews", { id: n.id }) }}
+                                onPress={() => { this.props.navigation.push("BusinessNews", { id: n.id }) }}
                             >
                                 <BusinessNews.Card
                                     businessProfileName={n.Business.profileName}

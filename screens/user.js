@@ -198,7 +198,7 @@ export default class UserProfileScreen extends React.Component{
                                             margin: 4
                                         }}
                                         onPress={()=>{
-                                            this.props.navigation.navigate("Business", {businessID: item.businessID})
+                                            this.props.navigation.push("Business", {businessID: item.businessID})
                                         }}
                                     >
                                         <InvestmentCard
