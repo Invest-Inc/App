@@ -2,8 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import LoginScreen from './screens/LoginScreen';
+import NewsReaderScreen from './screens/NewsReaderScreen';
 import RegisterScreen from './screens/RegisterScreen';
-import StartupProfile from './screens/StartupProfile';
+import StartupProfileScreen from './screens/StartupProfileScreen';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 class AuthenticationScreen extends React.Component{
   constructor(props){
@@ -51,18 +55,18 @@ class AuthenticationScreen extends React.Component{
   }
 }
 
+const Stack = createNativeStackNavigator();
+
+
+
 export default function App() {
   return (
-    <StartupProfile></StartupProfile>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Startup" component={StartupProfileScreen}></Stack.Screen>
+        <Stack.Screen name="News" component={NewsReaderScreen}></Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

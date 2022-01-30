@@ -78,13 +78,57 @@ function Body(props){
     </Text>
 }
 
+function BodyBlack(props){
+    return <Text
+        {...props}
+        style={{
+            fontSize: 17, 
+            fontWeight: '900',
+            ...props.style
+        }}
+    >
+        {props.children}
+    </Text>
+}
+
+function Footnote(props){
+    return <Text
+        {...props}
+        style={{
+            fontSize: 13, 
+            fontWeight: '400', 
+            color: 'grey', 
+            textTransform: 'uppercase', 
+            ...props.style
+        }}
+    >
+        {props.children}
+    </Text>
+}
+
+function FootnoteDemiBold(props){
+    return <Text
+        {...props}
+        style={{
+            fontSize: 13, 
+            fontWeight: '600', 
+            ...props.style
+        }}
+    >
+        {props.children}
+    </Text>
+}
+
 const StyledText = {
     ScreenTitle, 
     Headline, 
     Subheadline, 
     LargeTitle,
-    Title1, 
-    Body
+    Title1,
+    Body, 
+    BodyBlack,
+    Footnote, 
+    FootnoteDemiBold
 }
 
 export default StyledText
