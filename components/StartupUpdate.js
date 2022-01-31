@@ -2,81 +2,63 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import StyledText from './StyledText';
+import Spacer from './Spacer';
 
-class News extends React.Component{
-    constructor(props){
-        super(props);
+export default function StartupUpdate({
+    type, 
+    date, 
+    title, 
+    summary, 
+    onPress, 
+    style
+}){
+    let typeText;
+    let icon;
+    switch(type){
+        case 'news':
+            typeText = 'noticias';
+            icon = 'newspaper';
+            break;
+        case 'operations':
+            typeText = 'operaciones';
+            icon = 'hammer';
+            break;
+        default:
+            typeText = type;
+            icon = 'ellipsis-horizontal';
     }
-    render(){
-        return <TouchableOpacity 
-            style={{...styles.container, ...this.props.style}}
-            disabled={!this.props.onPress}
-            onPress={this.props.onPress}
-        >
-            <View style={styles.icon}>
-                <Ionicons name="newspaper" color="white" size={20}></Ionicons>
-            </View>
-            <View style={styles.details}>
-                <StyledText.Footnote style={{marginBottom: 4}}>
-                    Noticias • {this.props.date}
-                </StyledText.Footnote>
-                <StyledText.BodyBlack style={{marginBottom: 4}}>
-                {this.props.title}
-                </StyledText.BodyBlack>
-            </View>
-        </TouchableOpacity>
-    }
-}
-
-class Operations extends React.Component{
-    constructor(props){
-        super(props);
-    }
-    render(){
-        return <TouchableOpacity 
-            style={{...styles.container, ...this.props.style}}
-        >
-            <View style={styles.icon}>
-                <Ionicons name="hammer" color="white" size={20}></Ionicons>
-            </View>
-            <View style={styles.details}>
-                <StyledText.Footnote style={{marginBottom: 4}}>
-                    Operaciones • 6 de agosto del 2016
-                </StyledText.Footnote>
-                <View style={{marginBottom: 4, flexDirection: 'row', alignItems: 'baseline'}}>
-                    <StyledText.BodyBlack>3.0</StyledText.BodyBlack>
-                    <Ionicons name='star' size={20} color={'#FFCC00'}></Ionicons>
-                    <Ionicons name='star' size={20} color={'#FFCC00'}></Ionicons>
-                    <Ionicons name='star' size={20} color={'#FFCC00'}></Ionicons>
-                </View>
-            </View>
-        </TouchableOpacity>
-    }
+    return <TouchableOpacity
+        disabled={!onPress}
+        onPress={onPress}
+        style={{...styles.container, ...style}}
+    >
+        <View style={styles.iconContainer}>
+            <Ionicons name={icon} color='white' size={20}></Ionicons>
+        </View>        
+        <Spacer width={8}></Spacer>
+        <View>
+            <StyledText.Footnote>
+                {typeText} • 6 de agosto del 2016
+            </StyledText.Footnote>
+            <Spacer height={4}></Spacer>
+            <StyledText.BodyBlack>
+                Reporte de operaciones Q2 2016
+            </StyledText.BodyBlack>
+        </View>
+    </TouchableOpacity>
 }
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row', 
-        alignItems: 'flex-start',
+        flexDirection: 'row',
     }, 
-    icon: {
+    iconContainer: {
         height: 44, 
         width: 44, 
         borderRadius: 22, 
-        backgroundColor: 'black', 
+        backgroundColor: 'black',
         alignItems: 'center', 
-        justifyContent: 'center',
-        marginRight: 4
-    }, 
-    details: {
-        marginLeft: 4,
-        flex: 1
+        justifyContent: 'center', 
+        textAlign: 'center'
     }
 })
-
-const StartupUpdate = {
-    News, 
-    Operations
-}
-
-export default StartupUpdate;

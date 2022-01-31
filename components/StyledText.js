@@ -40,6 +40,19 @@ function Subheadline(props){
     </Text>
 }
 
+function SubheadlineBold(props){
+    return <Text
+        {...props}
+        style={{
+            fontSize: 15, 
+            fontWeight: '800',
+            ...props.style
+        }}
+    >
+        {props.children}
+    </Text>
+}
+
 function LargeTitle(props){
     return <Text
         {...props}
@@ -123,6 +136,7 @@ const StyledText = {
     ScreenTitle, 
     Headline, 
     Subheadline, 
+    SubheadlineBold, 
     LargeTitle,
     Title1,
     Body, 
