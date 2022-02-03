@@ -1,11 +1,14 @@
 {
   "expo": {
-    "name": "App",
-    "slug": "App",
+    "name": "Invest Inc App",
+    "slug": "investincgroup",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "bundleIdentifier": "com.investincgroup.app"
+    }
   },
   "name": "App"
 }

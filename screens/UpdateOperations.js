@@ -4,7 +4,7 @@ import Profile from '../components/Profile';
 import Spacer from '../components/Spacer';
 import StyledText from '../components/StyledText';
 
-export default class UpdateNews extends React.Component {
+export default class UpdateOperations extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,8 +12,7 @@ export default class UpdateNews extends React.Component {
         }
     }
     render() {
-        return <KeyboardAvoidingView behavior='height' keyboardVerticalOffset={91}>
-        <SafeAreaView style={{height: '100%'}}>
+        return <SafeAreaView style={{height: '100%'}}>
             <ScrollView>
                 <View style={{ padding: 14 }}>
                     <Profile.SmallBaddge
@@ -22,28 +21,21 @@ export default class UpdateNews extends React.Component {
                     ></Profile.SmallBaddge>
                     <Spacer height={4}></Spacer>
                     <StyledText.ScreenTitle>
-                        Rappi, la empresa que cambió la forma de comprar con el celular
+                        Reporte de operaciones Q2 2016
                     </StyledText.ScreenTitle>
-                    <Spacer height={10}></Spacer>
+                    <Spacer height={8}></Spacer>
                     <StyledText.Subheadline style={{ color: 'grey' }}>
-                        30 de enero del 2022 • 8 min de lectura
+                        30 de enero del 2022
                     </StyledText.Subheadline>
+                    <Spacer height={8}></Spacer>
+                    <StyledText.Body>
+                        Resumen descriptivo de este documento
+                    </StyledText.Body>
                 </View>
 
-                <View style={{ padding: 14 }}>
-                    <TextInput
-                        placeholder='Start typing...'
-                        style={{
-                            fontSize: 17
-                        }}
-                        multiline={true}
-                        scrollEnabled={false}
-                    ></TextInput>
-                </View>
+                
             </ScrollView>
-            {/* In the future we will support rtf (rich text formatting for news updates). Here is where the toolbar will go */}
         </SafeAreaView>
-        </KeyboardAvoidingView>
     }
 }
 

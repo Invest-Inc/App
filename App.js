@@ -8,6 +8,8 @@ import MainFeedScreen from './screens/MainFeedScreen';
 import LoginScreen from './screens/AuthLoginScreen';
 import RegisterScreen from './screens/AuthRegisterScreen';
 import UpdateNews from './screens/UpdateNews';
+import UpdateOperations from './screens/UpdateOperations';
+import UpdateFinancials from './screens/UpdateFinancials';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,11 +27,14 @@ const AuthStack = () => (
 )
 
 const AppStack = () => (
+  
   <Stack.Navigator>
+    
     <Stack.Screen
       name='Feed'
       component={MainFeedScreen}
     ></Stack.Screen>
+    
     <Stack.Screen
       name="Startup"
       component={ProfileStartupScreen}
@@ -53,6 +58,14 @@ const AppStack = () => (
     <Stack.Screen
       name="News"
       component={UpdateNews}
+    ></Stack.Screen>
+    <Stack.Screen
+      name="Operations"
+      component={UpdateOperations}
+    ></Stack.Screen>
+    <Stack.Screen
+      name='Finances'
+      component={UpdateFinancials}
     ></Stack.Screen>
   </Stack.Navigator>
 )

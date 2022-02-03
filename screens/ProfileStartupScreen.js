@@ -138,6 +138,24 @@ export default class ProfileStartupScreen extends React.Component{
                         this.props.navigation.push('News')
                     }}
                 ></StartupUpdate>
+                <StartupUpdate
+                    style={{
+                        paddingVertical: 12
+                    }}
+                    type='operations'
+                    onPress={()=>{
+                        this.props.navigation.push('Operations')
+                    }}
+                ></StartupUpdate>
+                <StartupUpdate
+                    style={{
+                        paddingVertical: 12
+                    }}
+                    type='operations'
+                    onPress={()=>{
+                        this.props.navigation.push('Finances')
+                    }}
+                ></StartupUpdate>
             </View>
 
         </ScrollView>
