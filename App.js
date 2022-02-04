@@ -12,6 +12,7 @@ import UpdateOperations from './screens/UpdateOperations';
 import UpdateFinancials from './screens/UpdateFinancials';
 import AuthenticationContext from './AuthenticationContext';
 import { Text } from 'react-native';
+import SearchScreen from './screens/SearchScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,7 +37,10 @@ const AppStack = () => (
       name='Feed'
       component={MainFeedScreen}
     ></Stack.Screen>
-
+    <Stack.Screen
+      name='Search' 
+      component={SearchScreen}
+    ></Stack.Screen>
     <Stack.Screen
       name="Startup"
       component={ProfileStartupScreen}
@@ -71,16 +75,6 @@ const AppStack = () => (
     ></Stack.Screen>
   </Stack.Navigator>
 )
-
-/* export default function App() {
-  return (
-    <NavigationContainer>
-      <AuthStack></AuthStack>
-    </NavigationContainer>
-  );
-}
-
- */
 
 export default class App extends React.Component {
   static contextType = AuthenticationContext;

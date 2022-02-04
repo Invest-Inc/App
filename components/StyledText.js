@@ -90,6 +90,18 @@ function Body(props){
         {props.children}
     </Text>
 }
+function BodySemiBold(props){
+    return <Text
+        {...props}
+        style={{
+            fontSize: 17, 
+            fontWeight: '500', 
+            ...props.style
+        }}
+    >
+        {props.children}
+    </Text>
+}
 
 function BodyBlack(props){
     return <Text
@@ -140,6 +152,7 @@ const StyledText = {
     LargeTitle,
     Title1,
     Body, 
+    BodySemiBold,
     BodyBlack,
     Footnote, 
     FootnoteDemiBold

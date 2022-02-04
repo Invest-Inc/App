@@ -60,18 +60,19 @@ export default class ProfileStartupScreen extends React.Component{
         };
     }
     async componentDidMount(){
+        const startupId = this.props.route.params.startupId || 3;
         {
-            const res = await fetch('http://api.investincgroup.com/api/2/startup/3');
+            const res = await fetch(`http://api.investincgroup.com/api/2/startup/${startupId}`);
             const data = await res.json();
             this.setState({data});
         }
         {
-            const res = await fetch('http://api.investincgroup.com/api/2/startup/3/employees');
+            const res = await fetch(`http://api.investincgroup.com/api/2/startup/${startupId}/employees`);
             const employees = await res.json();
             this.setState({employees});
         }
         {
-            const res = await fetch('http://api.investincgroup.com/api/2/startup/13/updates');
+            const res = await fetch(`http://api.investincgroup.com/api/2/startup/${startupId}/updates`);
             const updates = await res.json();
             this.setState({updates});
         }
