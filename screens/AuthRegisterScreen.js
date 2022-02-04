@@ -3,10 +3,12 @@ import { Image, SafeAreaView, View, Text, KeyboardAvoidingView, TouchableOpacity
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import InvestIncLogo from '../assets/logo.png';
+import AuthenticationContext from '../AuthenticationContext';
 import { StyledInput } from '../components/StyledInput';
 import StyledText from '../components/StyledText';
 
 class RegisterScreen extends React.Component{
+    static contextType = AuthenticationContext;
     constructor(props){
         super(props);
         this.name = createRef();
@@ -18,8 +20,51 @@ class RegisterScreen extends React.Component{
         this.username = createRef();
         this.biography = createRef();
     }
+    async submit(){
+        // Clear errors
+        ['name', 'email', 'password', 'passwordConfirm', 'birthday', 'nationality', 'username', 'biography'].forEach(key => {
+            this[key].current.hideError();
+        });
+        // Check types
+        let errors = false;
+        ['name', 'email', 'password', 'passwordConfirm', 'birthday', 'nationality', 'username', 'biography'].forEach(key => {
+            if(this[key].current.value == ''){
+                errors = true;
+                this[key].current.showError();
+            }
+        })
+        if(errors) return alert("Ingresa todos los datos");
+        // Check matching passwords
+        if(this.password.value != this.passwordConfirm.value){
+            this.passwordConfirm.showError();
+            return alert("Las contraseñas no coinciden");
+        }
+        // Send request
+        try {
+            const req = await fetch('http://api.investincgroup.com/api/2/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: this.name.current.value, 
+                    email: this.email.current.value, 
+                    password: this.password.current.value, 
+                    birthday: this.birthday.current.value, 
+                    nationality: this.nationality.current.value, 
+                    biography: this.biography.current.value, 
+                    username: this.username.current.value
+                })
+            });
+            const data = await req.json();
+            this.context.updateAuthToken(data);
+        } catch (e) {
+            alert("Ocurrió un error. Intenta de nuevo")
+        }
+    }
     render(){
-        return <SafeAreaView>
+        return <SafeAreaView style={{backgroundColor: 'white'}}>
             <KeyboardAwareScrollView>
                 <View style={{height: '100%', padding: 20}}>
                     {/* Invest Inc Logo */}
@@ -51,6 +96,7 @@ class RegisterScreen extends React.Component{
                             keyboardType="email-address"
                             textContentType="email-address"
                             autoCapitalize={false}
+                            autoCorrect={false}
                             ref={this.email}
                         ></StyledInput>
                         <StyledInput
@@ -111,18 +157,7 @@ class RegisterScreen extends React.Component{
                             flex: 1, 
                             alignItems: 'center',
                         }}
-                        onPress={()=>{
-                            this.props.onSubmit({
-                                name: this.name.current.value, 
-                                email: this.email.current.value, 
-                                password: this.password.current.value, 
-                                passwordConfirm: this.passwordConfirm.current.value, 
-                                birthday: this.birthday.current.value, 
-                                nationality: this.nationality.current.value, 
-                                username: this.username.current.value, 
-                                biography: this.biography.current.value
-                            })
-                        }}
+                        onPress={this.submit.bind(this)}
                     >
                         <StyledText.Headline style={{color: 'white'}}>Registrar</StyledText.Headline>
                     </TouchableOpacity>
@@ -131,7 +166,9 @@ class RegisterScreen extends React.Component{
                             alignItems: 'center', 
                             marginTop: 20
                         }}
-                        onPress={this.props.onCancel}
+                        onPress={()=>{
+                            this.props.navigation.navigate('Login')
+                        }}
                     >
                         <StyledText.Body style={{color: 'rgb(0, 122, 255)'}}>Ya tengo una cuenta</StyledText.Body>
                     </TouchableOpacity>

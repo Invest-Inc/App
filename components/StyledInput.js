@@ -1,43 +1,69 @@
+import { Ionicons } from '@expo/vector-icons';
 import React, { createRef } from 'react';
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-export class StyledInput extends React.Component{
-    constructor(props){
+export class StyledInput extends React.Component {
+    /**
+     * 
+     * @param {import('react-native').TextInputProps} props 
+     */
+    constructor(props) {
         super(props);
         this.input = createRef();
         this.state = {
-            value: ""
+            value: "", 
+            trailingIcon: ""
         }
     }
-    get value(){
+    get value() {
         return this.state.value
     }
-
-    render(){
+    showError(){
+        this.setState({
+            trailingIcon: 'warning'
+        })
+    }
+    hideError(){
+        this.setState({
+            trailingIcon: ''
+        })
+    }
+    render() {
         return <View
             style={{
                 paddingVertical: 8
             }}
         >
             <Text style={{
-                fontSize: 17, 
+                fontSize: 17,
                 fontWeight: '700'
             }}>{this.props.label}</Text>
-            <TextInput
-                {...this.props}
-                ref={this.input}
+            <View
                 style={{
+                    flexDirection: 'row',
+                    alignItems: 'center', 
+                    borderBottomWidth: StyleSheet.hairlineWidth,
+                    borderBottomColor: 'grey', 
+                    flexGrow: 1, 
                     paddingVertical: 4,
-                    fontSize: 17, 
-                    fontWeight: '500',
-                    color: 'grey',
-                    borderBottomWidth: StyleSheet.hairlineWidth, 
-                    borderBottomColor: 'grey'
                 }}
-                onChangeText={(value) => {
-                    this.setState({value})
-                }}
-            ></TextInput>
+            >
+                <TextInput
+                    {...this.props}
+                    ref={this.input}
+                    style={{
+                        fontSize: 17,
+                        fontWeight: '500',
+                        color: 'grey',  
+                        flexGrow: 1                      
+                    }}
+                    onChangeText={(value) => {
+                        this.setState({ value });
+                        this.props.onChangeText?.(value);
+                    }}
+                ></TextInput>
+                <Ionicons name={this.state.trailingIcon} size={14}></Ionicons>
+            </View>
         </View>
     }
 }

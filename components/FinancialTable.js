@@ -101,7 +101,7 @@ export class FinancialTableRow extends React.Component{
             </View>
             <ScrollView horizontal 
                 ref={this._scrollview}
-                scrollEventThrottle={8}
+                scrollEventThrottle={5}
                 bounces={false}
                 showsHorizontalScrollIndicator={false}
                 onScroll={this.props.onScroll}

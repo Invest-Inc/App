@@ -8,6 +8,9 @@
     ],
     "ios": {
       "bundleIdentifier": "com.investincgroup.app"
+    },
+    "android": {
+      "package": "com.investincgroup.app"
     }
   },
   "name": "App"

@@ -10,6 +10,8 @@ import RegisterScreen from './screens/AuthRegisterScreen';
 import UpdateNews from './screens/UpdateNews';
 import UpdateOperations from './screens/UpdateOperations';
 import UpdateFinancials from './screens/UpdateFinancials';
+import AuthenticationContext from './AuthenticationContext';
+import { Text } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,14 +29,14 @@ const AuthStack = () => (
 )
 
 const AppStack = () => (
-  
+
   <Stack.Navigator>
-    
+
     <Stack.Screen
       name='Feed'
       component={MainFeedScreen}
     ></Stack.Screen>
-    
+
     <Stack.Screen
       name="Startup"
       component={ProfileStartupScreen}
@@ -70,12 +72,39 @@ const AppStack = () => (
   </Stack.Navigator>
 )
 
-export default function App() {
+/* export default function App() {
   return (
     <NavigationContainer>
-      {/* <AuthStack></AuthStack> */}
-      <AppStack></AppStack>
+      <AuthStack></AuthStack>
     </NavigationContainer>
   );
 }
 
+ */
+
+export default class App extends React.Component {
+  static contextType = AuthenticationContext;
+  constructor(props) {
+    super(props);
+    this.state = {
+      auth: {
+        authToken: null,
+        updateAuthToken: token => {
+          alert(token);
+          this.state.auth.authToken = token;
+          this.forceUpdate();
+        }
+      }
+    }
+  }
+
+  render() {
+    return <AuthenticationContext.Provider value={this.state.auth}>
+      <NavigationContainer>
+        {this.state.auth.authToken ?
+          <AppStack></AppStack> : <AuthStack></AuthStack>
+        }
+      </NavigationContainer>
+    </AuthenticationContext.Provider>
+  }
+}
