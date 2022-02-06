@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import React, { createRef } from 'react';
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export class StyledInput extends React.Component {
     /**
@@ -29,9 +29,14 @@ export class StyledInput extends React.Component {
         })
     }
     render() {
-        return <View
+        return <TouchableOpacity
+            onPress={()=>{
+                this.input.current.focus();
+            }}
             style={{
-                paddingVertical: 8
+                paddingVertical: 8, 
+                flexGrow: 1, 
+                flexShrink: 0
             }}
         >
             <Text style={{
@@ -54,8 +59,7 @@ export class StyledInput extends React.Component {
                     style={{
                         fontSize: 17,
                         fontWeight: '500',
-                        color: 'grey',  
-                        flexGrow: 1                      
+                        color: 'grey',                 
                     }}
                     onChangeText={(value) => {
                         this.setState({ value });
@@ -64,7 +68,7 @@ export class StyledInput extends React.Component {
                 ></TextInput>
                 <Ionicons name={this.state.trailingIcon} size={14}></Ionicons>
             </View>
-        </View>
+        </TouchableOpacity>
     }
 }
 

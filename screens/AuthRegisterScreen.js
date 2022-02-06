@@ -4,8 +4,9 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import InvestIncLogo from '../assets/logo.png';
 import AuthenticationContext from '../AuthenticationContext';
+import Spacer from '../components/Spacer';
 import { StyledInput } from '../components/StyledInput';
-import StyledText from '../components/StyledText';
+import TextStyles from '../components/TextStyles';
 
 class RegisterScreen extends React.Component{
     static contextType = AuthenticationContext;
@@ -78,13 +79,15 @@ class RegisterScreen extends React.Component{
                             width: 137
                         }}></Image>
                     {/* Title */}
-                    <StyledText.ScreenTitle>
+                    <Text style={TextStyles.ScreenTitle.orange}>
                         Bienvenido a la mejor forma de invertir
-                    </StyledText.ScreenTitle>
+                    </Text>
+                    <Spacer height={30}></Spacer>
                     {/* Heading */}
-                    <StyledText.Headline style={{marginTop: 30, marginBottom: 10}}>
+                    <Text style={TextStyles.Headline.semibold}>
                         Crea tu cuenta
-                    </StyledText.Headline>
+                    </Text>
+                    <Spacer height={10}></Spacer>
                     <StyledInput
                             label="Nombre completo"
                             placeholder="Jonathan Appleseed"
@@ -112,12 +115,15 @@ class RegisterScreen extends React.Component{
                             ref={this.passwordConfirm}
                         ></StyledInput>
                     {/* Heading */}
-                    <StyledText.Headline style={{marginTop: 30, marginBottom: 10}}>
+                    <Spacer height={30}></Spacer>
+                    <Text style={TextStyles.Headline.semibold}>
                         Cuéntanos sobre tí
-                    </StyledText.Headline>
-                    <StyledText.Subheadline style={{marginBottom: 15}}>
+                    </Text>
+                    <Spacer height={10}></Spacer>
+                    <Text style={TextStyles.Subheadline}>
                         Esta información nos ayudará a brindarte una mejor experiencia y a personalizar tu perfil
-                    </StyledText.Subheadline>
+                    </Text>
+                    <Spacer height={15}></Spacer>
                     <StyledInput
                         label="Cumpleaños"
                         placeholder="28/01/1983"
@@ -141,12 +147,13 @@ class RegisterScreen extends React.Component{
                         ref={this.biography}
                     ></StyledInput>
                     {/* Heading */}
-                    <StyledText.Headline style={{marginTop: 30, marginBottom: 10}}>
-                        Identificación oficial
-                    </StyledText.Headline>
-                    <StyledText.Subheadline style={{marginBottom: 15}}>
-                    Para poder realizar inversiones en la plataforma es necesario validar tu información con una identificación oficial
-                    </StyledText.Subheadline>
+                    <Spacer height={30}></Spacer>
+                    <Text style={TextStyles.Headline.semibold}></Text>
+                    <Spacer height={10}></Spacer>
+                    <Text style={TextStyles.Subheadline.regular}>
+                        Para poder realizar inversiones en la plataforma es necesario validar tu información con una identificación oficial
+                    </Text>
+                    <Spacer height={15}></Spacer>
                     <TouchableOpacity
                         style={{
                             marginTop: 40, 
@@ -159,7 +166,9 @@ class RegisterScreen extends React.Component{
                         }}
                         onPress={this.submit.bind(this)}
                     >
-                        <StyledText.Headline style={{color: 'white'}}>Registrar</StyledText.Headline>
+                        <Text style={{...TextStyles.Headline.semibold, color: 'white'}}>
+                            Registrar
+                        </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={{
@@ -170,7 +179,9 @@ class RegisterScreen extends React.Component{
                             this.props.navigation.navigate('Login')
                         }}
                     >
-                        <StyledText.Body style={{color: 'rgb(0, 122, 255)'}}>Ya tengo una cuenta</StyledText.Body>
+                        <Text style={{...TextStyles.Body.regular, color: 'rgb(0, 122, 255)'}}>
+                            Ya tengo una cuenta
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAwareScrollView>

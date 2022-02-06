@@ -1,11 +1,12 @@
 import React, { createRef } from 'react';
 import { Image, SafeAreaView, View, Text, KeyboardAvoidingView, TouchableOpacity, ScrollView, StyleSheet, TextInput } from 'react-native';
-import StyledText from '../components/StyledText';
+
 import InvestIncLogo from '../assets/logo.png';
 import { Ionicons } from '@expo/vector-icons';
 import Spacer from '../components/Spacer';
 import AuthenticationContext from '../AuthenticationContext';
 import SearchBox from '../components/SearchBox';
+import TextStyles from '../components/TextStyles';
 
 
 
@@ -50,7 +51,9 @@ export default class MainFeedScreen extends React.Component{
                             <Ionicons name='person-circle' size={40}></Ionicons>
                         </TouchableOpacity>
                     </View>
-                    <StyledText.ScreenTitle>¡Hola {this.state.me?.name}!</StyledText.ScreenTitle>
+                    <Text style={TextStyles.ScreenTitle.orange}>
+                        ¡Hola {this.state.me?.name}!
+                    </Text>
                     <Spacer height={14}></Spacer>
                     <SearchBox
                         onChangeText={(q) => {
@@ -62,7 +65,7 @@ export default class MainFeedScreen extends React.Component{
                     <TouchableOpacity onPress={()=>{
                         this.props.navigation.push('Startup')
                     }}>
-                        <StyledText.Title1>Rappi</StyledText.Title1>
+                        <Text>Rappi</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>

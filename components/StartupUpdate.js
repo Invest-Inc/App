@@ -3,62 +3,66 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import StyledText from './StyledText';
 import Spacer from './Spacer';
+import TextStyles from './TextStyles';
 
 export default function StartupUpdate({
     type, 
+    name, 
     date, 
     title, 
     summary, 
-    onPress, 
-    style
+    downvotes, 
+    upvotes, 
+    children
 }){
-    let typeText;
-    let icon;
-    switch(type){
-        case 'news':
-            typeText = 'noticias';
-            icon = 'newspaper';
-            break;
-        case 'operations':
-            typeText = 'operaciones';
-            icon = 'hammer';
-            break;
-        default:
-            typeText = type;
-            icon = 'ellipsis-horizontal';
+    const icons = {
+        'news': 'ios-newspaper', 
+        'operations': 'settings', 
+        'balancesheet': 'stats-chart', 
+        'incomestatement': 'receipt'
     }
-    return <TouchableOpacity
-        disabled={!onPress}
-        onPress={onPress}
-        style={{...styles.container, ...style}}
-    >
-        <View style={styles.iconContainer}>
-            <Ionicons name={icon} color='white' size={20}></Ionicons>
-        </View>        
-        <Spacer width={8}></Spacer>
-        <View>
-            <StyledText.Footnote>
-                {typeText} • 6 de agosto del 2016
-            </StyledText.Footnote>
-            <Spacer height={4}></Spacer>
-            <StyledText.BodyBlack>
-                Reporte de operaciones Q2 2016
-            </StyledText.BodyBlack>
-        </View>
-    </TouchableOpacity>
-}
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-    }, 
-    iconContainer: {
-        height: 44, 
-        width: 44, 
-        borderRadius: 22, 
-        backgroundColor: 'black',
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        textAlign: 'center'
-    }
-})
+
+    return <View
+        style={{
+            flexDirection: 'row'
+        }}
+    >
+        <View 
+            style={{
+                height: 44, 
+                width: 44, 
+                borderRadius: 22, 
+                backgroundColor: 'black', 
+                alignItems: 'center', 
+                justifyContent: 'center'
+            }}
+        >
+            <Ionicons name={icons[type]} size={17} color='white'></Ionicons>
+        </View>
+        <Spacer width={8}></Spacer>
+        <View
+            style={{
+                flex: 1
+            }}
+        >
+            <View 
+                style={{
+                    flex: 1, 
+                    flexDirection: 'row', 
+                    justifyContent: 'space-between'
+                }}
+            >
+                <Text style={{...TextStyles.Footnone.semibold, color: 'grey'}}>{name}</Text>
+                <Spacer width={2}></Spacer>
+                <Text style={{...TextStyles.Footnone.regular, color: 'grey'}}>{date}</Text>
+            </View>
+            <Spacer height={4}></Spacer>
+            <Text style={TextStyles.Body.black}>{title}</Text>
+            <Spacer height={4}></Spacer>
+            <View>
+                {children}
+            </View>
+        </View>
+    </View>
+}

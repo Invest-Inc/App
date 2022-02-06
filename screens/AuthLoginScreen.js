@@ -6,6 +6,7 @@ import AuthenticationContext from '../AuthenticationContext';
 import Spacer from '../components/Spacer';
 import { StyledInput } from '../components/StyledInput';
 import StyledText from '../components/StyledText';
+import TextStyles from '../components/TextStyles';
 
 class LoginScreen extends React.Component {
     static contextType = AuthenticationContext;
@@ -38,7 +39,6 @@ class LoginScreen extends React.Component {
         return <SafeAreaView style={{ backgroundColor: 'white' }}>
             <KeyboardAvoidingView behavior='padding'>
                 <View style={{ height: '100%', padding: 20 }}>
-
                     {/* Invest Inc Logo */}
                     <Spacer height={40}></Spacer>
                     <Image
@@ -51,14 +51,14 @@ class LoginScreen extends React.Component {
                         }}></Image>
                     <Spacer height={8}></Spacer>
                     {/* Title */}
-                    <StyledText.ScreenTitle>
+                    <Text style={TextStyles.ScreenTitle.orange}>
                         Bienvenido a la mejor forma de invertir
-                    </StyledText.ScreenTitle>
+                    </Text>
                     <Spacer height={40}></Spacer>
                     {/* Heading */}
-                    <StyledText.Headline>
+                    <Text style={TextStyles.Headline.semibold}>
                         Ingresa tus datos para iniciar sesión
-                    </StyledText.Headline>
+                    </Text>
                     <Spacer height={10}></Spacer>
                     <View style={{
                         flex: 1,
@@ -95,7 +95,7 @@ class LoginScreen extends React.Component {
                                     this.props.navigation.navigate('Register');
                                 }}
                             >
-                                <StyledText.Headline>Registrarme</StyledText.Headline>
+                                <Text style={TextStyles.Headline.semibold}>Registrarme</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={{
@@ -109,7 +109,7 @@ class LoginScreen extends React.Component {
                                 }}
                                 onPress={this.submit.bind(this)}
                             >
-                                <StyledText.Headline style={{ color: 'white' }}>Iniciar sesión</StyledText.Headline>
+                                <Text style={{...TextStyles.Headline.semibold, color: 'white'}}>Iniciar sesión</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

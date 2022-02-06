@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, Text, View, TouchableOpacity } from "react-native";
 import Spacer from './Spacer';
-import StyledText from './StyledText';
+import TextStyles from './TextStyles';
 
 export function ProfileSmall({
     profilePictureURL,
@@ -17,12 +17,12 @@ export function ProfileSmall({
             style={{
                 height: 30,
                 width: 30,
-                borderRadius: 30
+                borderRadius: 15
             }}
             source={{ uri: profilePictureURL }}
         ></Image>
         <Spacer width={8}></Spacer>
-        <StyledText.BodySemiBold>{name}</StyledText.BodySemiBold>
+        <Text style={TextStyles.Body.semibold}>{name}</Text>
     </View>
 }
 
@@ -39,17 +39,52 @@ export function ProfileMedium({
     >
         <Image
             style={{
-                height: 30,
-                width: 30,
-                borderRadius: 30
+                height: 44,
+                width: 44,
+                borderRadius: 22
             }}
             source={{ uri: profilePictureURL }}
         ></Image>
         <Spacer width={8}></Spacer>
         <View>
-            <StyledText.BodySemiBold>{name}</StyledText.BodySemiBold>
+            <Text style={TextStyles.Body.semibold}>{name}</Text>
             <Spacer height={2}></Spacer>
-            <StyledText.Subheadline style={{color: '#979797'}}>{subtitle}</StyledText.Subheadline>
+            <Text style={{...TextStyles.Subheadline.regular, color: '#979797'}}>{subtitle}</Text>
+        </View>
+    </View>
+}
+
+export function ProfileDetail({
+    profilePictureURL,
+    name,
+    subtitle, 
+    description
+}){
+    return <View
+            style={{
+                flexDirection: 'row',
+                alignItems: 'flex-start'
+            }}
+        >
+        <Image
+            style={{
+                height: 44,
+                width: 44,
+                borderRadius: 22
+            }}
+            source={{ uri: profilePictureURL }}
+        ></Image>
+        <Spacer width={8}></Spacer>
+        <View
+            style={{
+                flex: 1
+            }}
+        >
+            <Text style={TextStyles.Body.semibold}>{name}</Text>
+            <Spacer height={2}></Spacer>
+            <Text style={{...TextStyles.Subheadline.regular, color: '#979797'}}>{subtitle}</Text>
+            <Spacer height={4}></Spacer>
+            <Text style={TextStyles.Subheadline.regular}>{description}</Text>
         </View>
     </View>
 }

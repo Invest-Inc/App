@@ -38,7 +38,7 @@ const AppStack = () => (
       component={MainFeedScreen}
     ></Stack.Screen>
     <Stack.Screen
-      name='Search' 
+      name='Search'
       component={SearchScreen}
     ></Stack.Screen>
     <Stack.Screen
@@ -84,7 +84,6 @@ export default class App extends React.Component {
       auth: {
         authToken: null,
         updateAuthToken: token => {
-          alert(token);
           this.state.auth.authToken = token;
           this.forceUpdate();
         }

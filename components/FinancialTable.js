@@ -2,7 +2,7 @@ import objectPath from 'object-path';
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput, Alert } from 'react-native';
 
-const BALANCESHEET_FINANCIAL_KEYS_TRANSLATIONS = {
+const FINANCIAL_KEYS_TRANSLATIONS = {
     "meta.currency": "Moneda", 
     "data.assets.current_assets.cash": "Efectivo y equivalentes en efectivo", 
     "data.assets.current_assets.short_term_investment": "Instrumentos financieros", 
@@ -45,11 +45,9 @@ const BALANCESHEET_FINANCIAL_KEYS_TRANSLATIONS = {
     "data.equity.retained_earnings": "Utilidades retenidas", 
     "data.equity.yearly_earning": "Utilidad de ejercicio", 
     "data.equity.others": "Otros...", 
-    "data.equity.total": "Patrimonio"
-}
+    "data.equity.total": "Patrimonio",
 
-const INCOMESTATEMENT_FINANCIAL_KEYS_TRANSLATIONS = {
-    "meta.currency": "Moneda", 
+
     "data.sales_revenue": "Ventas netas", 
     "data.cost_of_goods_sold": "Costo de ventas", 
     "data.gross_pprofit": "Utilidad bruta",  
@@ -67,9 +65,6 @@ const INCOMESTATEMENT_FINANCIAL_KEYS_TRANSLATIONS = {
     "data.net_profit": "Utilidad neta"
 }
 
-const getValueByPath = (obj, path) =>
-    path.split('.').reduce((o,i) => o?.[i], obj);
-
 const flattenObject = (obj = {}, parent, res = {}) => {
     // Iterate over keys
     for(const key of Object.keys(obj)){
@@ -84,112 +79,21 @@ const flattenObject = (obj = {}, parent, res = {}) => {
     return res;
 }
 
-export class FinancialTableRow extends React.Component{
-    constructor(props){
-        super(props);
-        this._scrollview = React.createRef();
-        if(this.props.type == 'balancesheet') this.keys = BALANCESHEET_FINANCIAL_KEYS_TRANSLATIONS;
-        if(this.props.type == 'incomestatement') this.keys = INCOMESTATEMENT_FINANCIAL_KEYS_TRANSLATIONS;
-    }
-    scrollTo(...props){
-        this._scrollview.current.scrollTo(...props);
-    }
-    render(){
-        return <View style={styles.rowContainer}>
-            <View style={styles.rowTitleContainer}>
-                <Text style={{fontSize: 14}}>{this.keys[this.props.title] || this.props.title}</Text>
-            </View>
-            <ScrollView horizontal 
-                ref={this._scrollview}
-                scrollEventThrottle={5}
-                bounces={false}
-                showsHorizontalScrollIndicator={false}
-                onScroll={this.props.onScroll}
-            >
-                {
-                    this.props.values?.map?.((value, i) => (
-                        <View style={styles.cellContainer}>
-                            <TextInput
-                                style={{fontSize: 14}}
-                                placeholder='XX'
-                                defaultValue={value?.toLocaleString()}  
-                                onChangeText={(newValue)=>{
-                                    this.props.onChangeText?.(newValue, i);
-                                }}
-                                editable={this.props.editable}
-                            ></TextInput>
-                        </View>
-                    ))
-                }
-            </ScrollView>
-        </View>
-    }
-}
-
 export default class FinancialTable extends React.Component{
     constructor(props){
         super(props);
-        this._rows = [];
-        this.keys = undefined;
-        // Select keys according to type
-        if(this.props.type == undefined) throw "You must specify a type of financial table!";
-        if(this.props.type == 'incomestatement') this.keys = INCOMESTATEMENT_FINANCIAL_KEYS_TRANSLATIONS
-        if(this.props.type == 'balancesheet') this.keys = BALANCESHEET_FINANCIAL_KEYS_TRANSLATIONS
     }
-    async componentDidMount(){
-
-    }
-
     render(){
+        const rows = flattenObject(this.props.data);
         return <View>
             {
-                Object.keys(this.keys).map(key => {
-                    const ref = React.createRef();
-                    this._rows.push(ref)
-                    return <FinancialTableRow 
-                        ref={ref}
-                        title={key}
-                        values={
-                            this.props.data?.map((l, i) => objectPath.get(l.data, key))
-                        }
-                        onScroll={e=>{
-                            const { x } = e.nativeEvent.contentOffset;
-                            this._rows.forEach(i => {
-                                i?.current?.scrollTo?.({ x, animated: false });
-                            })
-                        }}
-                        onChangeText={(value, columnIndex)=>{
-                            objectPath.set(this.props.data?.[columnIndex]?.data, key, value);
-                        }}
-                        type={this.props.type}
-                        editable={this.props.editable && this.props.data.length <= 1}
-                    ></FinancialTableRow>
-                })
+                Object.keys(rows).forEach(key => (
+                    <View>
+                        <Text>{FINANCIAL_KEYS_TRANSLATIONS[key]}</Text> 
+                        <Text>{ objectPath.get(this.props.data, key) }</Text>
+                    </View>
+                ))
             }
         </View>
     }
 }
-
-const styles = StyleSheet.create({
-    rowContainer: {
-        flexDirection: 'row', 
-        alignItems: 'flex-end', 
-        borderBottomColor: '#979797', 
-        borderBottomWidth: StyleSheet.hairlineWidth
-    }, 
-    rowTitleContainer: {
-        width: 200, 
-        padding: 14,
-        borderRightColor: '#979797', 
-        borderRightWidth: StyleSheet.hairlineWidth,
-        flexGrow: 1
-    }, 
-    cellContainer: {
-        width: 140, 
-        padding: 14, 
-        flexDirection: 'row', 
-        alignItems: 'center', 
-        justifyContent: 'flex-end', 
-        flexGrow: 1
-    }
-})
