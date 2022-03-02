@@ -1,6 +1,6 @@
 import React, { createRef } from 'react';
 import { SafeAreaView, ScrollView, TextInput, View, KeyboardAvoidingView , StyleSheet } from 'react-native';
-import Profile from '../components/Profile';
+import Profile, { ProfileSmall } from '../components/Profile';
 import Spacer from '../components/Spacer';
 import StyledText from '../components/StyledText';
 
@@ -15,10 +15,10 @@ export default class UpdateOperations extends React.Component {
         return <SafeAreaView style={{height: '100%'}}>
             <ScrollView>
                 <View style={{ padding: 14 }}>
-                    <Profile.SmallBaddge
+                    <ProfileSmall
                         profilePictureURL="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/wcz8emhdm7d7ac4bnwcq"
                         name="Rappi"
-                    ></Profile.SmallBaddge>
+                    ></ProfileSmall>
                     <Spacer height={4}></Spacer>
                     <StyledText.ScreenTitle>
                         Reporte de operaciones Q2 2016

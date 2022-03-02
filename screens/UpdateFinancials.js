@@ -17,7 +17,7 @@ export default class UpdateFinancials extends Component {
     async componentDidMount(){
         const updateId = this.props.route.params.updateId;
         try{
-            const req = await fetch(`http://api.investincgroup.com/api/2/updates/${updateId}`);
+            const req = await fetch(`https://api.investincgroup.com/api/2/updates/${updateId}`);
             const data = await req.json();
             this.setState({data})
         } catch(e){

@@ -20,7 +20,7 @@ export default class SearchScreen extends React.Component {
     async search(q){
         if(q == '') return;
         try{
-            const req = await fetch(`http://api.investincgroup.com/api/2/search?q=${q}`);
+            const req = await fetch(`https://api.investincgroup.com/api/2/search?q=${q}`);
             const results = await req.json();
             this.setState({results});
             console.log(results)

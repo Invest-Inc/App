@@ -20,7 +20,7 @@ export default class MainFeedScreen extends React.Component{
     }
     async componentDidMount(){
         try{
-            const req = await fetch('http://api.investincgroup.com/api/2/me', {
+            const req = await fetch('https://api.investincgroup.com/api/2/me', {
                 headers: {
                     'Authorization': `Bearer ${this.context.authToken}`
                 }

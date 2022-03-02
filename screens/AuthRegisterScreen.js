@@ -42,7 +42,7 @@ class RegisterScreen extends React.Component{
         }
         // Send request
         try {
-            const req = await fetch('http://api.investincgroup.com/api/2/auth/register', {
+            const req = await fetch('https://api.investincgroup.com/api/2/auth/register', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

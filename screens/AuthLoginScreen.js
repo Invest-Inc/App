@@ -17,7 +17,7 @@ class LoginScreen extends React.Component {
     }
     async submit() {
         try {
-            const req = await fetch('http://api.investincgroup.com/api/2/auth/login', {
+            const req = await fetch('https://api.investincgroup.com/api/2/auth/login', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

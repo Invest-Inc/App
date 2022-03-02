@@ -33,7 +33,7 @@ export default class ProfileUserScreen extends React.Component {
         if (username == undefined) this.props.navigation.goBack();
 
         {
-            const res = await fetch(`http://api.investincgroup.com/api/2/user/${username}`, {
+            const res = await fetch(`https://api.investincgroup.com/api/2/user/${username}`, {
                 headers: {
                     'Authorization': `Bearer ${this.context.authToken}`
                 }
@@ -41,7 +41,7 @@ export default class ProfileUserScreen extends React.Component {
             const data = await res.json();
             this.setState({ data });
         } {
-            const res = await fetch(`http://api.investincgroup.com/api/2/user/${username}/curriculum`);
+            const res = await fetch(`https://api.investincgroup.com/api/2/user/${username}/curriculum`);
             const data = await res.json();
             const experience = {};
             data.forEach(d => {
@@ -74,7 +74,7 @@ export default class ProfileUserScreen extends React.Component {
     async follow() {
         if (this.state.data.username == undefined) return;
         try {
-            const req = await fetch(`http://api.investincgroup.com/api/2/user/${this.state.data.username}/follow`, {
+            const req = await fetch(`https://api.investincgroup.com/api/2/user/${this.state.data.username}/follow`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${this.context.authToken}`
@@ -90,7 +90,7 @@ export default class ProfileUserScreen extends React.Component {
     async unfollow() {
         if (this.state.data.username == undefined) return;
         try {
-            const req = await fetch(`http://api.investincgroup.com/api/2/user/${this.state.data.username}/unfollow`, {
+            const req = await fetch(`https://api.investincgroup.com/api/2/user/${this.state.data.username}/unfollow`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${this.context.authToken}`
@@ -108,7 +108,7 @@ export default class ProfileUserScreen extends React.Component {
     }
     async submitEdit() {
         try {
-            const req = await fetch(`http://api.investincgroup.com/api/2/me`, {
+            const req = await fetch(`https://api.investincgroup.com/api/2/me`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${this.context.authToken}`,
@@ -125,7 +125,7 @@ export default class ProfileUserScreen extends React.Component {
     }
     async createExperience(data){
         try{
-            const req = await fetch(`http://api.investincgroup.com/api/2/me/curriculum`, {
+            const req = await fetch(`https://api.investincgroup.com/api/2/me/curriculum`, {
                 method: 'POST', 
                 headers: {
                     'Authorization': `Bearer ${this.context.authToken}`,
@@ -143,7 +143,7 @@ export default class ProfileUserScreen extends React.Component {
     
     async updateExperience(data){
         try{
-            const req = await fetch(`http://api.investincgroup.com/api/2/me/curriculum/${data.user_curricular_activity_id}`, {
+            const req = await fetch(`https://api.investincgroup.com/api/2/me/curriculum/${data.user_curricular_activity_id}`, {
                 method: 'PUT', 
                 headers: {
                     'Authorization': `Bearer ${this.context.authToken}`,
@@ -161,7 +161,7 @@ export default class ProfileUserScreen extends React.Component {
 
     async deleteExperience(data){
         try{
-            const req = await fetch(`http://api.investincgroup.com/api/2/me/curriculum/${data.user_curricular_activity_id}`, {
+            const req = await fetch(`https://api.investincgroup.com/api/2/me/curriculum/${data.user_curricular_activity_id}`, {
                 method: 'DELETE', 
                 headers: {
                     'Authorization': `Bearer ${this.context.authToken}`,

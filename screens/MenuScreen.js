@@ -17,14 +17,14 @@ export default class MenuScreen extends React.Component{
     }
     async componentDidMount(){
         try{
-            const req_me = await fetch('http://api.investincgroup.com/api/2/me', {
+            const req_me = await fetch('https://api.investincgroup.com/api/2/me', {
                 headers: {
                     'Authorization': `Bearer ${this.context.authToken}`
                 }
             });
             const me = await req_me.json();
             this.setState({me});
-            const req_startups = await fetch('http://api.investincgroup.com/api/2/me/roles', {
+            const req_startups = await fetch('https://api.investincgroup.com/api/2/me/roles', {
                 headers: {
                     'Authorization': `Bearer ${this.context.authToken}`
                 }

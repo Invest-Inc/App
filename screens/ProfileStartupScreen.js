@@ -30,17 +30,17 @@ export default class ProfileStartupScreen extends React.Component {
     async componentDidMount() {
         const startupId = this.props.route.params.startupId || 3;
         {
-            const res = await fetch(`http://api.investincgroup.com/api/2/startup/${startupId}`);
+            const res = await fetch(`https://api.investincgroup.com/api/2/startup/${startupId}`);
             const data = await res.json();
             this.setState({ data });
         }
         {
-            const res = await fetch(`http://api.investincgroup.com/api/2/startup/${startupId}/employees`);
+            const res = await fetch(`https://api.investincgroup.com/api/2/startup/${startupId}/employees`);
             const employees = await res.json();
             this.setState({ employees });
         }
         {
-            const res = await fetch(`http://api.investincgroup.com/api/2/startup/${startupId}/updates`);
+            const res = await fetch(`https://api.investincgroup.com/api/2/startup/${startupId}/updates`);
             const updates = await res.json();
             this.setState({ updates });
         }
@@ -73,7 +73,7 @@ export default class ProfileStartupScreen extends React.Component {
 
     async submitEdit() {
         try {
-            const req = await fetch(`http://api.investincgroup.com/api/2/startup/${this.state.data.startup_id}`, {
+            const req = await fetch(`https://api.investincgroup.com/api/2/startup/${this.state.data.startup_id}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${this.context.authToken}`,
@@ -138,7 +138,7 @@ export default class ProfileStartupScreen extends React.Component {
                         borderRadius: 16
                     }}
                     source={{
-                        uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+                        uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
                     }}
                     useNativeControls
                 ></Video>
