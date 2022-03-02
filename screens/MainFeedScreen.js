@@ -45,7 +45,7 @@ export default class MainFeedScreen extends React.Component{
                         ></Image>
                         <TouchableOpacity
                             onPress={()=>{
-                                this.props.navigation.navigate('User', {username: this.state.me?.username})
+                                this.props.navigation.navigate('Menu')
                             }}
                         >
                             <Ionicons name='person-circle' size={40}></Ionicons>

@@ -38,6 +38,7 @@ export class StyledInput extends React.Component {
                 flexGrow: 1, 
                 flexShrink: 0
             }}
+            disabled={this.props.editable == false}
         >
             <Text style={{
                 fontSize: 17,

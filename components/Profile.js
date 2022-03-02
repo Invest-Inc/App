@@ -17,7 +17,8 @@ export function ProfileSmall({
             style={{
                 height: 30,
                 width: 30,
-                borderRadius: 15
+                borderRadius: 15,
+                backgroundColor: 'black'
             }}
             source={{ uri: profilePictureURL }}
         ></Image>
@@ -41,7 +42,8 @@ export function ProfileMedium({
             style={{
                 height: 44,
                 width: 44,
-                borderRadius: 22
+                borderRadius: 22,
+                backgroundColor: 'black'
             }}
             source={{ uri: profilePictureURL }}
         ></Image>
@@ -70,7 +72,8 @@ export function ProfileDetail({
             style={{
                 height: 44,
                 width: 44,
-                borderRadius: 22
+                borderRadius: 22,
+                backgroundColor: 'black'
             }}
             source={{ uri: profilePictureURL }}
         ></Image>

@@ -13,6 +13,7 @@ import UpdateFinancials from './screens/UpdateFinancials';
 import AuthenticationContext from './AuthenticationContext';
 import { Text } from 'react-native';
 import SearchScreen from './screens/SearchScreen';
+import MenuScreen from './screens/MenuScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,10 @@ const AppStack = () => (
     <Stack.Screen
       name='Feed'
       component={MainFeedScreen}
+    ></Stack.Screen>
+    <Stack.Screen
+      name='Menu'
+      component={MenuScreen}
     ></Stack.Screen>
     <Stack.Screen
       name='Search'
